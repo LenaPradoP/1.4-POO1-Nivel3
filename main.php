@@ -2,10 +2,12 @@
 require_once "cinema.php";
 require_once "film.php";
 
+
 $cinema1 = new Cinema('Renoir Floridablanca', 'Barcelona');
 $cinema2 = new Cinema('Renoir Princesa', 'Madrid');
 $cinema3 = new Cinema('Renoir Retiro', 'Madrid');
 $cinema4 = new Cinema('Verdi', 'Barcelona');
+$cinemas = [$cinema1, $cinema2, $cinema3, $cinema4];
 
 $film1 = new Film('Nosferatu', 132, 'Robert Eggers');
 $film2 = new Film('Parthenope', 137, 'Paolo Sorrentino');
@@ -38,6 +40,19 @@ echo $cinema2->showLongestFilm();
 echo $cinema3->showLongestFilm();
 echo $cinema4->showLongestFilm();
 
-echo $cinema1->searchByDirector('Robert Eggers');
+echo searchByDirector('Robert Eggers', $cinemas);
+echo searchByDirector('Halina Reijn', $cinemas);
+echo searchByDirector('Edward Berger', $cinemas);
 
+function searchByDirector(string $director, array $cinemas) {
+
+    foreach ($cinemas as $cinema) {
+        foreach($cinema->getFilms() as $film) {
+            if (strtolower($film->getDirector()) == strtolower($director)) {
+            echo $cinema->getName() . ': ' . PHP_EOL . $film . PHP_EOL;
+        }
+    }
+}
+
+}
 ?>

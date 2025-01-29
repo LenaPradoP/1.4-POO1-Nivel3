@@ -13,6 +13,13 @@ public function __construct(string $name, string $city) {
     $this->city = $city;
     $this->films = [];
 }
+public function getName(): string {
+    return $this->name;
+}
+
+public function getFilms(): array {
+    return $this->films;
+}
 
 public function addFilm(Film $film) : void {
     $this->films[] = $film;
@@ -25,7 +32,6 @@ public function showFilms() {
     foreach($this->films as $film){
         echo  $film;
     }
-
 }
 
 public function showLongestFilm() : string {
@@ -39,15 +45,6 @@ public function showLongestFilm() : string {
     }
     return "$this->name: " . PHP_EOL 
     . "La película más larga es: $longestFilm" . PHP_EOL;
-}
-
-public function searchByDirector(string $director) {
-
-    foreach($this->films as $film) {
-        if ($film->getDirector() == $director) {
-            echo "";
-        }
-    }
 }
 
 }
